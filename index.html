@@ -15,13 +15,13 @@
 <aside class="hidden md:flex fixed left-0 top-0 bottom-0 w-[68px] bg-black border-r border-white/[0.06] flex-col items-center py-5 z-50">
   <div class="w-8 h-8 rounded bg-[#E50914] flex items-center justify-center font-black text-sm">W</div>
   <nav class="mt-8 flex flex-col items-center gap-6 w-full">
-    <a href="#" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition"><i data-lucide="search" class="w-[20px] h-[20px]"></i></a>
-    <a href="index.html" class="nav-active w-full flex justify-center py-1"><i data-lucide="house" class="w-[20px] h-[20px]"></i></a>
-    <a href="#new" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition"><i data-lucide="clapperboard" class="w-[20px] h-[20px]"></i></a>
-    <a href="#trending" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition"><i data-lucide="monitor" class="w-[20px] h-[20px]"></i></a>
-    <a href="#" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition"><i data-lucide="trending-up" class="w-[20px] h-[20px]"></i></a>
-    <a href="#" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition"><i data-lucide="plus" class="w-[20px] h-[20px]"></i></a>
-    <a href="#" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition"><i data-lucide="shuffle" class="w-[20px] h-[20px]"></i></a>
+    <a href="search.html" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition" title="Cari"><i data-lucide="search" class="w-[20px] h-[20px]"></i></a>
+    <a href="index.html" class="nav-active w-full flex justify-center py-1" title="Home"><i data-lucide="house" class="w-[20px] h-[20px]"></i></a>
+    <a href="#new" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition" title="Film"><i data-lucide="clapperboard" class="w-[20px] h-[20px]"></i></a>
+    <a href="#trending" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition" title="Trending"><i data-lucide="monitor" class="w-[20px] h-[20px]"></i></a>
+    <a href="search.html?q=anime" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition" title="Trending Search"><i data-lucide="trending-up" class="w-[20px] h-[20px]"></i></a>
+    <a href="search.html" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition" title="Tambah List"><i data-lucide="plus" class="w-[20px] h-[20px]"></i></a>
+    <a href="#" onclick="event.preventDefault(); const g=document.getElementById('newGrid'); if(g&&g.children[0]){ g.children[Math.floor(Math.random()*g.children.length)].click(); }" class="w-full flex justify-center py-1 text-zinc-500 hover:text-white transition" title="Shuffle Play"><i data-lucide="shuffle" class="w-[20px] h-[20px]"></i></a>
   </nav>
   <div class="mt-auto flex flex-col items-center gap-4">
     <img src="https://i.pravatar.cc/100?img=15" class="w-7 h-7 rounded-full object-cover border border-white/10">
@@ -107,10 +107,10 @@
 <!-- MOBILE BOTTOM NAV -->
 <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-black border-t border-white/10 h-[62px] flex items-center justify-around px-2">
   <a href="index.html" class="flex flex-col items-center gap-1 text-white"><i data-lucide="house" class="w-5 h-5"></i><span class="text-[10px] font-semibold">Home</span></a>
-  <a href="#new" class="flex flex-col items-center gap-1 text-zinc-500"><i data-lucide="search" class="w-5 h-5"></i><span class="text-[10px]">Search</span></a>
-  <a href="player.html" class="flex flex-col items-center gap-1 text-zinc-500"><span class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center"><i data-lucide="play" class="w-4 h-4 fill-black"></i></span></a>
+  <a href="search.html" class="flex flex-col items-center gap-1 text-zinc-500"><i data-lucide="search" class="w-5 h-5"></i><span class="text-[10px]">Search</span></a>
+  <a href="#" onclick="event.preventDefault(); document.getElementById('heroPlay').click();" class="flex flex-col items-center gap-1 text-zinc-500"><span class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center"><i data-lucide="play" class="w-4 h-4 fill-black"></i></span></a>
   <a href="#trending" class="flex flex-col items-center gap-1 text-zinc-500"><i data-lucide="clapperboard" class="w-5 h-5"></i><span class="text-[10px]">List</span></a>
-  <a href="#" class="flex flex-col items-center gap-1 text-zinc-500"><i data-lucide="user" class="w-5 h-5"></i><span class="text-[10px]">Saya</span></a>
+  <a href="search.html" class="flex flex-col items-center gap-1 text-zinc-500"><i data-lucide="user" class="w-5 h-5"></i><span class="text-[10px]">Saya</span></a>
 </nav>
 
 <script src="data.js"></script>
