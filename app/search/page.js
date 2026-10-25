@@ -1,5 +1,5 @@
 import Sidebar from "../../components/Sidebar";
-import { search } from "../../lib/bstation";
+import { search, gwSuggest } from "../../lib/bstation";
 import Card from "../../components/Card";
 
 export const dynamic = "force-dynamic";
@@ -7,17 +7,28 @@ export const dynamic = "force-dynamic";
 export default async function SearchPage({ searchParams }) {
   const q = searchParams?.q || "";
   let result = null;
-  if (q) { try { result = await search(q, "id"); } catch (e) {} }
+  let suggest=[];
+  if (q) { 
+    try { result = await search(q, "id"); } catch (e) {} 
+    try { suggest = await gwSuggest(q, "id"); } catch {}
+  }
   return (
     <main>
       <Sidebar />
       <div className="md:ml-[68px] max-w-[1400px] mx-auto px-4 md:px-8 py-6 pb-20">
         <h1 className="text-2xl font-black">Cari Anime & Video</h1>
-        <p className="text-sm text-zinc-500 mt-1">Live Bstation — semua tombol aktif, thumbnail anti-error</p>
+        <p className="text-sm text-zinc-500 mt-1">Live Bstation gateway suggest + search — semua tombol aktif tanpa error</p>
         <form action="/search" className="mt-4 flex gap-2">
           <input name="q" defaultValue={q} placeholder="Ketik: naruto, one piece, frieren..." className="flex-1 h-11 px-4 rounded-full bg-[#141414] border border-white/10 text-sm focus:outline-none focus:border-white/20" />
           <button className="px-6 h-11 rounded-full bg-[#E50914] text-white text-sm font-bold">Cari</button>
         </form>
+        {suggest.length>0 && (
+          <div className="mt-3 flex gap-2 overflow-x-auto no-scrollbar pb-2">
+            {suggest.slice(0,8).map(s=>(
+              <a key={s.keyword} href={`/search?q=${encodeURIComponent(s.keyword)}`} className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs whitespace-nowrap hover:bg-white hover:text-black">{s.keyword}</a>
+            ))}
+          </div>
+        )}
         {q && !result && <div className="mt-6 text-xs text-red-400">Gagal memuat pencarian — coba keyword lain</div>}
         {result && (
           <div className="mt-6 space-y-6">
