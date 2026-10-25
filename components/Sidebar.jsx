@@ -1,5 +1,5 @@
 "use client";
-import { Search, House, Clapperboard, Monitor, TrendingUp, Plus, Shuffle, Calendar, Crown, Film, Bookmark } from "lucide-react";
+import { Search, House, TrendingUp, Calendar, Film, Bookmark, Shuffle, Clock, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 export default function Sidebar() {
@@ -16,10 +16,11 @@ export default function Sidebar() {
           <Link href="/jadwal" className={`w-full flex justify-center py-1 ${isActive("/jadwal")}`} title="Jadwal"><Calendar size={20} /></Link>
           <Link href="/genre" className={`w-full flex justify-center py-1 ${isActive("/genre")}`} title="Genre"><Film size={20} /></Link>
           <Link href="/list" className={`w-full flex justify-center py-1 ${isActive("/list")}`} title="List Saya"><Bookmark size={20} /></Link>
-          <Link href="/search?q=anime" className="w-full flex justify-center py-1 text-zinc-500 hover:text-white" title="Shuffle"><Shuffle size={20} /></Link>
+          <Link href="/history" className={`w-full flex justify-center py-1 ${isActive("/history")}`} title="Riwayat"><Clock size={20} /></Link>
+          <Link href="/profile" className={`w-full flex justify-center py-1 ${isActive("/profile")}`} title="Profile"><User size={20} /></Link>
         </nav>
         <div className="mt-auto flex flex-col items-center gap-3">
-          <div className="w-7 h-7 rounded-full bg-zinc-800 flex items-center justify-center text-xs">👤</div>
+          <Link href="/profile"><img src="https://i.pravatar.cc/100?img=15" alt="profile" className="w-7 h-7 rounded-full border border-white/10" /></Link>
         </div>
       </aside>
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-black border-t border-white/10 h-[62px] flex items-center justify-around px-2">
@@ -27,7 +28,7 @@ export default function Sidebar() {
         <Link href="/search" className={`flex flex-col items-center gap-1 ${pathname==="/search"?"text-white":"text-zinc-500"}`}><Search size={18} /><span className="text-[10px]">Cari</span></Link>
         <Link href="/trending" className="flex flex-col items-center gap-1 text-zinc-500"><TrendingUp size={18} /><span className="text-[10px]">Top</span></Link>
         <Link href="/jadwal" className="flex flex-col items-center gap-1 text-zinc-500"><Calendar size={18} /><span className="text-[10px]">Jadwal</span></Link>
-        <Link href="/list" className="flex flex-col items-center gap-1 text-zinc-500"><Bookmark size={18} /><span className="text-[10px]">Saya</span></Link>
+        <Link href="/profile" className="flex flex-col items-center gap-1 text-zinc-500"><User size={18} /><span className="text-[10px]">Saya</span></Link>
       </nav>
     </>
   );

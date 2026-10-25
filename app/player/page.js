@@ -18,7 +18,6 @@ export default async function PlayerPage({ searchParams }) {
     }
   }
 
-  // OGV Anime Play
   if (isAnime && seasonData?.season) {
     const s = seasonData.season;
     return (
@@ -38,7 +37,7 @@ export default async function PlayerPage({ searchParams }) {
               </div>
               <div className="mt-4 bg-[#141414] rounded-lg border border-white/5 p-5">
                 <h1 className="text-xl font-black">{s.title}</h1>
-                <p className="text-xs text-zinc-400 mt-1">{s.views || ""} • {s.index_show || ""} • {s.rating || ""}</p>
+                <p className="text-xs text-zinc-400 mt-1">{s.views || ""} • {s.index_show || ""}</p>
                 <p className="mt-3 text-sm text-zinc-300 leading-relaxed">{s.evaluate || s.desc || ""}</p>
                 <div className="mt-3 flex flex-wrap gap-2">{(s.styles||[]).map(st=> <span key={st} className="px-2 py-1 rounded-full bg-white/10 text-xs border border-white/10">{st}</span>)}</div>
               </div>
@@ -58,7 +57,7 @@ export default async function PlayerPage({ searchParams }) {
               </div>
               <div className="bg-[#111] rounded-lg border border-white/5 p-4 text-xs text-zinc-400">
                 <div className="font-bold text-white">Tentang Anime</div>
-                <p className="mt-2">Studio: {s.studio || "-"} • Tahun: {s.year || "-"} • Total Episode: {s.total_episodes || "-"}</p>
+                <p className="mt-2">Studio: {s.studio || "-"} • Tahun: {s.year || "-"} • Total: {s.total_episodes || "-"}</p>
                 <a href={seasonData.url} target="_blank" className="inline-block mt-3 px-4 py-2 rounded-full bg-white text-black font-bold">Buka di Bstation</a>
               </div>
             </div>
@@ -68,7 +67,6 @@ export default async function PlayerPage({ searchParams }) {
     );
   }
 
-  // UGC Video
   return (
     <main>
       <Sidebar />
@@ -88,7 +86,7 @@ export default async function PlayerPage({ searchParams }) {
               <h1 className="text-xl font-black leading-tight">{data?.title || "Memuat..."}</h1>
               <p className="mt-1 text-xs text-zinc-400">{data?.publishedAt || ""} • {data?.durationSec ? Math.floor(data.durationSec/60)+":"+String(data.durationSec%60).padStart(2,"0") : ""} • {data?.uploader?.name || ""}</p>
               <div className="mt-3 flex gap-2">
-                <button onClick={()=>{ if(typeof window!=='undefined' && data){ const list=JSON.parse(localStorage.getItem('wibu_list')||'[]'); if(!list.find(x=>x.id===data.id)){ list.push({id:data.id, title:data.title, cover:data.cover}); localStorage.setItem('wibu_list', JSON.stringify(list)); alert('Ditambahkan ke List!'); } else alert('Sudah di List'); }}} className="px-4 py-2 rounded-full bg-[#E50914] text-white text-xs font-bold">♡ Simpan ke List</button>
+                <button id="saveListBtn" className="px-4 py-2 rounded-full bg-[#E50914] text-white text-xs font-bold">♡ Simpan ke List</button>
                 <a href={data ? `https://www.bilibili.tv/id/video/${id}` : "#"} target="_blank" className="px-4 py-2 rounded-full bg-white/10 border border-white/10 text-xs font-bold">Buka di Bstation</a>
               </div>
               <p className="mt-4 text-sm text-zinc-300 leading-relaxed">{data?.description || "Tidak ada deskripsi"}</p>
@@ -100,6 +98,26 @@ export default async function PlayerPage({ searchParams }) {
                 </div>
               )}
             </div>
+            <script dangerouslySetInnerHTML={{__html:`
+              document.getElementById('saveListBtn')?.addEventListener('click', ()=>{
+                try{
+                  const data=${JSON.stringify(data).replace(/</g,'\\u003c')};
+                  if(!data || !data.id) return;
+                  const list=JSON.parse(localStorage.getItem('wibu_list')||'[]');
+                  if(!list.find(x=>x.id===data.id)){ list.push({id:data.id, title:data.title, cover:data.cover}); localStorage.setItem('wibu_list', JSON.stringify(list)); alert('Ditambahkan ke List!'); } else alert('Sudah di List');
+                  const h=JSON.parse(localStorage.getItem('wibu_history')||'[]');
+                  h.unshift({id:data.id, title:data.title, cover:data.cover, time: Date.now()}); localStorage.setItem('wibu_history', JSON.stringify(h.slice(0,50)));
+                }catch(e){}
+              });
+              // auto history
+              try{
+                const data=${JSON.stringify(data).replace(/</g,'\\u003c')};
+                if(data && data.id){
+                  const h=JSON.parse(localStorage.getItem('wibu_history')||'[]');
+                  if(!h.find(x=>x.id===data.id) || true){ h.unshift({id:data.id, title:data.title, cover:data.cover, time: Date.now()}); localStorage.setItem('wibu_history', JSON.stringify(h.slice(0,50))); }
+                }
+              }catch(e){}
+            `}} />
           </div>
           <div className="space-y-4">
             <div className="bg-[#141414] rounded-lg border border-white/5 p-4">
