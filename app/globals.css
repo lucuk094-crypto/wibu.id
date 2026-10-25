@@ -2,12 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 * { font-family: 'Inter', sans-serif; }
-body { background: #080808; }
-::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
+html { scroll-behavior: smooth; }
+body { background: #070709; overflow-x: hidden; }
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-thumb { background: #2a2a2e; border-radius: 10px; }
+::-webkit-scrollbar-track { background: #0a0a0c; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* Glassmorphism */
+.glass { background: rgba(20,20,24,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
+.glass-strong { background: rgba(18,18,20,0.75); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.1); }
+.glass-card { background: rgba(20,20,22,0.55); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.06); transition: all 0.35s cubic-bezier(0.4,0,0.2,1); }
+.glass-card:hover { background: rgba(28,28,32,0.7); border-color: rgba(255,255,255,0.12); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04); }
+
+/* Hero */
 .hero-title { font-weight: 900; letter-spacing: -0.02em; line-height: 0.95; text-transform: uppercase; }
 .hero-title .red-box { background: #E50914; padding: 0.02em 0.18em 0.06em; margin-left: 0.12em; display: inline-block; line-height: 1; }
-.card-hover { transition: transform 0.25s ease; }
-.card-hover:hover { transform: scale(1.04); }
+
+/* Animations */
+@keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes pulse-glow { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.animate-slideIn { animation: slideIn 0.5s ease-out forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+/* Card hover */
+.card-hover { transition: all 0.35s cubic-bezier(0.4,0,0.2,1); }
+.card-hover:hover { transform: translateY(-6px) scale(1.02); }
+
+/* Smooth page */
+.page-enter { animation: slideIn 0.4s ease-out; }
+
+/* Loading dots */
+@keyframes dotPulse { 0%,80%,100% { opacity: 0.3; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
