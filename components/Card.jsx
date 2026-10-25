@@ -2,8 +2,9 @@ import Link from "next/link";
 export default function Card({ item }) {
   const cover = item.cover?.startsWith("//") ? "https:" + item.cover : item.cover;
   const isAnime = item.type === "ogv";
+  const href = isAnime ? `/player?id=${item.id}&type=ogv` : `/player?id=${item.id}&type=ugc`;
   return (
-    <Link href={isAnime ? `/play?id=${item.id}` : `/player?id=${item.id}&type=ugc`} className="card-hover flex-shrink-0 w-[145px] md:w-[168px] rounded-[6px] overflow-hidden bg-[#141414] block border border-white/5">
+    <Link href={href} className="card-hover flex-shrink-0 w-[145px] md:w-[168px] rounded-[6px] overflow-hidden bg-[#141414] block border border-white/5">
       <div className="aspect-[2/3] relative overflow-hidden bg-zinc-900">
         <img src={cover} alt={item.title} className="w-full h-full object-cover" loading="lazy" />
         <span className={`absolute top-1.5 left-1.5 text-white text-[9px] font-bold px-1.5 py-0.5 rounded ${item.badge === "Gratis" ? "bg-emerald-600" : item.badge ? "bg-[#E50914]" : "bg-black/70"}`}>{item.badge || (isAnime ? "Anime" : "N")}</span>
