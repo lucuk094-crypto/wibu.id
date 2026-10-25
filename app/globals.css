@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* { font-family: 'Inter', sans-serif; }
+body { background: #080808; }
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.hero-title { font-weight: 900; letter-spacing: -0.02em; line-height: 0.95; text-transform: uppercase; }
+.hero-title .red-box { background: #E50914; padding: 0.02em 0.18em 0.06em; margin-left: 0.12em; display: inline-block; line-height: 1; }
+.card-hover { transition: transform 0.25s ease; }
+.card-hover:hover { transform: scale(1.04); }

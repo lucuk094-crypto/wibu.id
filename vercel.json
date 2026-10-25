@@ -1,5 +1,1 @@
-{
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "public": true
-}
+{ "cleanUrls": true }
