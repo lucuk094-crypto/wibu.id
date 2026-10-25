@@ -1,7 +1,5 @@
 {
   "name": "wibu-id",
   "version": "1.0.0",
-  "description": "Wibu.ID - Netflix Dark + Live Bstation SSR",
-  "scripts": { "start": "node server.js" },
   "engines": { "node": "24.x" }
 }
