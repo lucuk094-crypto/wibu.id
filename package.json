@@ -1,13 +1,7 @@
 {
   "name": "wibu-id",
   "version": "1.0.0",
-  "description": "Wibu.ID - Netflix Dark + Live Bstation SSR - Clean Minimalist",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
-  },
-  "engines": { "node": ">=18.0.0" },
-  "keywords": ["anime","bstation","bilibili","nextjs","vercel"],
-  "license": "MIT"
+  "description": "Wibu.ID - Netflix Dark + Live Bstation SSR",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": "20.x" }
 }
