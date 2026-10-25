@@ -1,5 +1,5 @@
 import "./globals.css";
-export const metadata = { title: "Wibu.ID — Streaming Anime Legal", description: "Netflix Dark + Live Bstation SSR - Nonton anime legal via embed resmi" };
+export const metadata = { title: "Wibu.ID — Nonton Anime Legal • Netflix Dark", description: "Wibu.ID - Katalog anime legal, jadwal, trending, genre, live Bstation via Next.js + Embed Resmi" };
 export default function RootLayout({ children }) {
   return (
     <html lang="id">
