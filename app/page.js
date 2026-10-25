@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import Card from "../components/Card";
 import Link from "next/link";
 import { home } from "../lib/bstation";
+import { BILI_GENRES } from "../lib/categories";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -17,7 +18,7 @@ export default async function Home() {
       animeNew: [],
       animeTrending: [],
       timeline: [],
-      tabs: [{name:"Hot",id:"0"},{name:"Terbaru",id:"2"},{name:"Aksi",id:"aksi"}],
+      tabs: [{name:"Hot",id:"0"},{name:"Terbaru",id:"2"}],
     };
   }
   const heroItem = data.animeHot?.[0] || data.animeTrending?.[0] || data.popular?.[0];
@@ -46,13 +47,23 @@ export default async function Home() {
         <Hero item={heroItem} />
 
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 mt-6">
-          <div className="glass rounded-2xl p-3 flex gap-2 overflow-x-auto no-scrollbar">
-            <Link href="/genre" className="px-5 py-2 rounded-full text-xs font-black bg-white text-black whitespace-nowrap shadow">Semua Genre</Link>
-            {(data.tabs || []).slice(0,14).map(t=>(
-              <Link key={t.id+t.name} href={`/genre?name=${encodeURIComponent(t.name)}&id=${t.id||''}`} className="px-4 py-2 rounded-full text-xs font-semibold glass hover:bg-white hover:text-black whitespace-nowrap transition-all">
-                {t.name}
-              </Link>
-            ))}
+          <div className="glass rounded-2xl p-3">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xs font-black text-zinc-400 tracking-widest">KATEGORI</span>
+              <Link href="/category?type=anime" className="px-3 py-1 rounded-full text-xs font-bold glass hover:bg-white hover:text-black">Anime</Link>
+              <Link href="/category?type=dracin" className="px-3 py-1 rounded-full text-xs font-bold bg-[#E50914] text-white">Dracin</Link>
+              <Link href="/category?type=tv" className="px-3 py-1 rounded-full text-xs font-bold glass hover:bg-white hover:text-black">Acara TV</Link>
+              <span className="ml-auto text-[11px] text-zinc-500">55 Genre • Live Bstation</span>
+            </div>
+            <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+              <Link href="/genre" className="px-4 py-2 rounded-full text-xs font-black bg-white text-black whitespace-nowrap">SEMUA</Link>
+              {BILI_GENRES.slice(0,18).map(g=>(
+                <Link key={g.keyword} href={`/genre?name=${encodeURIComponent(g.name)}&id=${g.keyword}`} className="px-3 py-1.5 rounded-full text-xs font-semibold glass hover:bg-white hover:text-black whitespace-nowrap">
+                  {g.name}
+                </Link>
+              ))}
+              <Link href="/category" className="px-4 py-1.5 rounded-full text-xs font-bold bg-[#E50914] text-white whitespace-nowrap">+37 lagi →</Link>
+            </div>
           </div>
         </div>
 
@@ -75,26 +86,13 @@ export default async function Home() {
         <Section title="Terbaru" subtitle="Rilis terbaru — gateway Terbaru" items={data.animeNew?.slice(0,16)} href="/genre?name=Terbaru&id=2" count={data.animeNew?.length} />
         {data.animeTrending?.length>0 && <Section title="Rekomendasi Untukmu" subtitle="Anime trending pilihan" items={data.animeTrending.slice(0,10)} href="/genre" count={data.animeTrending.length} />}
 
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
-          {[
-            {title:"Auto Play Lancar", desc:"Embed resmi HD, HP & laptop"},
-            {title:"Glass Morphism", desc:"Blur elegan tanpa neon"},
-            {title:"Komentar Live", desc:"Like • balas • terpopuler"},
-            {title:"Semua Genre", desc:`${data.tabs?.length||14}+ filter lengkap`},
-          ].map(f=>(
-            <div key={f.title} className="glass rounded-xl p-4 hover:bg-white/[0.08] transition">
-              <div className="font-bold text-sm text-white">{f.title}</div><div className="text-xs text-zinc-500 mt-1">{f.desc}</div>
-            </div>
-          ))}
-        </div>
-
         <footer className="max-w-[1400px] mx-auto px-4 md:px-8 py-8 mt-8 border-t border-white/5 text-[11px] text-zinc-500 flex flex-wrap gap-3">
-          <span>© 2026 Wibu.ID • Glass • Live Bstation</span>
+          <span>© 2026 Wibu.ID • Glass • Live Bstation • Dracin 55 Genre</span>
           <span className="glass px-2 py-1 rounded-full text-emerald-400">● Live</span>
           <Link href="/search" className="hover:text-white">Cari</Link>
           <Link href="/jadwal" className="hover:text-white">Jadwal</Link>
           <Link href="/trending" className="hover:text-white">Trending</Link>
-          <Link href="/genre" className="hover:text-white">Genre</Link>
+          <Link href="/category" className="hover:text-white">Kategori</Link>
         </footer>
       </div>
     </main>
